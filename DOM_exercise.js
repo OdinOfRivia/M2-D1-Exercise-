@@ -6,12 +6,15 @@
   Highlight all of the words over 8 characters long in the paragraph text (with a yellow background for example)
 
 */
-const characters = document.querySelector("p")
-characters.innerHTML=characters.innerText
-.split(' ')
-.map(word => word.length >8 ? `<span style="background-color: yellow"> ${word}</span>"` :word)
-.join(' ');
-
+const paragraph = document.querySelector("p");
+paragraph.innerHTML = paragraph.innerText
+  .split(" ")
+  .map((wordOver8Charachters) =>
+  wordOver8Charachters.length > 8
+      ? `<span style="background-color: yellow"> ${wordOver8Charachters}</span>"`
+      : wordOver8Charachters
+  )
+  .join(" ");
 
 /*
   Exercise 02
@@ -19,11 +22,11 @@ characters.innerHTML=characters.innerText
   Add a link back to the source of the text after the paragraph tag.
   (http://officeipsum.com/)
 */
-const link = document.querySelector("a")
-link.innerText = 'Text something something';
-document.body.appendChild(link);
 
-
+const link = document.createElement("a");
+link.href = "http://officeipsum.com/";
+link.innerText = "Text from JS";
+document.body.append(link);
 
 /*
   Exercise 03
@@ -32,9 +35,7 @@ document.body.appendChild(link);
   A sentence can be assumed to be a string of text terminated with a period (.)
 */
 
-
-// :{
-
+paragraph.innerHTML = paragraph.innerHTML.split(".").join(".</p><p>");
 
 /* 
   Exercise 04
@@ -42,10 +43,10 @@ document.body.appendChild(link);
   Count the number of words in the paragraph tag and display the count afer the heading.
   You can assume that all words are separated by one singular whitespace.
 */
-
-const count = paragraph.innerHTML.split(' ').length;
-
-// :{
+const wordCount = paragraph.innerText.split(" ").length;
+const wordCountElem = document.createElement("div");
+wordCountElem.innerText = `${wordCount} words`;
+document.body.insertBefore(wordCountElem, paragraph);
 
 /*
   Exercise 05
@@ -53,4 +54,6 @@ const count = paragraph.innerHTML.split(' ').length;
   Replace all question marks (?) with thinking faces (🤔) and exclamation marks (!) with astonished faces (😲) 
 */
 
-// :{
+Array.from(document.querySelectorAll("p")).forEach((p) => {
+  p.innerHTML = p.innerHTML.replace(/\?/g, "🤔").replace(/\!/g, "😲");
+});
